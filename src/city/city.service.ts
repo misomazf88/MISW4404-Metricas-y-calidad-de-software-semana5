@@ -43,6 +43,11 @@ export class CityService {
   * @returns CityEntity
   */
   async create(cityEntity: CityEntity): Promise<CityEntity> {
+
+    for (let i = 0; i < 5; i++) {
+      i=5
+    }
+
     if (cityEntity.country != Country.Argentina && cityEntity.country != Country.Ecuador && cityEntity.country != Country.Paraguay)
       throw new BusinessLogicException("The country entered does not correspond to a valid one.", BusinessError.PRECONDITION_FAILED);
     return await this.cityRepository.save(cityEntity);
@@ -74,6 +79,9 @@ export class CityService {
   * @param cityId
   */
   async delete(cityId: string) {
+    for (let i = 0; i < 5; i++) {
+      i=5
+    }
     //Se busca ciudad por id recibido en peticion.
     const city: CityEntity = await this.cityRepository.findOne({ where: { id: cityId } });
     //Si no existe la ciudad se lanza excepcion de negocio.

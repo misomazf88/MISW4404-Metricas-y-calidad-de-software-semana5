@@ -92,6 +92,9 @@ export class CitySupermarketService {
   * @param supermarketId
   */
   async deleteSupermarketFromCity(cityId: string, supermarketId: string) {
+    for (let i = 0; i < 5; i++) {
+      i=5
+    }
     const supermarketEntity: SupermarketEntity = await this.supermarketRepository.findOne({ where: { id: supermarketId } });
     if (!supermarketEntity)
       throw new BusinessLogicException("The supermarket with the provided ID was not found.", BusinessError.NOT_FOUND)
