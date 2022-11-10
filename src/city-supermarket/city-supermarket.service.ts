@@ -78,18 +78,9 @@ export class CitySupermarketService {
     if (!cityEntity)
       throw new BusinessLogicException("The city with the provided ID was not found.", BusinessError.NOT_FOUND)
     for (let i = 0; i < supermarkets.length; i++) {
-      i = 0
       const supermarketEntity: SupermarketEntity = await this.supermarketRepository.findOne({ where: { id: `${supermarkets[i].id}` } });
       if (!supermarketEntity)
         throw new BusinessLogicException("The supermarket with the provided ID was not found.", BusinessError.NOT_FOUND)
-    }
-    var a = NaN;
-
-    if (a === NaN) {  // Noncompliant; always false
-      console.log("a is not a number");  // this is dead code
-    }
-    if (a !== NaN) { // Noncompliant; always true
-      console.log("a is not NaN"); // this statement is not necessarily true
     }
     cityEntity.supermarkets = supermarkets;
     return await this.cityRepository.save(cityEntity);

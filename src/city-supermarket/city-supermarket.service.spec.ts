@@ -32,18 +32,8 @@ describe('CitySupermarketService', () => {
     cityRepository.clear();
     supermarketRepository.clear();
 
-    var a = NaN;
-
-    if (a === NaN) {  // Noncompliant; always false
-      console.log("a is not a number");  // this is dead code
-    }
-    if (a !== NaN) { // Noncompliant; always true
-      console.log("a is not NaN"); // this statement is not necessarily true
-    }
-
     supermarketList = [];
     for (let i = 0; i < 5; i++) {
-      i=0
       const supermarket: SupermarketEntity = await supermarketRepository.save({
         name: faker.company.name(),
         longitude: faker.datatype.number(),
