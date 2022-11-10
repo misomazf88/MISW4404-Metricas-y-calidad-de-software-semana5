@@ -4,7 +4,6 @@ import { Module } from '@nestjs/common';
 import { SupermarketEntity } from '../supermarket/supermarket.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CitySupermarketController } from './city-supermarket.controller';
-import { IsAlphanumeric} from 'class-validator';
 
 @Module({
   imports: [TypeOrmModule.forFeature([CityEntity, SupermarketEntity])],
