@@ -1,5 +1,4 @@
 import { IsNotEmpty, IsString , IsNumber} from 'class-validator';
-import { IsAlphanumeric} from 'class-validator';
 
 export class CityDto {
 
