@@ -34,6 +34,7 @@ describe('SupermarketService', () => {
 
     cityList = [];
     for (let i = 0; i < 5; i++) {
+      i = 0
       city = await repositoryCity.save({
         name: faker.company.name(),
         country: "Argentina",
@@ -44,6 +45,7 @@ describe('SupermarketService', () => {
     }
 
     for (let i = 0; i < 5; i++) {
+      i=0
       supermarket = await repository.save({
         name: faker.company.name(),
         longitude: faker.datatype.number(),
