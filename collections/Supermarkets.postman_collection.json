@@ -1,0 +1,737 @@
+{
+	"info": {
+		"_postman_id": "662c707b-489a-4913-b303-f3a34139d63b",
+		"name": "Supermarkets",
+		"description": "Documentación para el recurso Supermarkets.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un supermercado válido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"id_supermercado\", data.id);\r",
+							"\r",
+							"pm.test(\"El código de estado es 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Almacen exito\",\r\n    \"longitude\": 123,\r\n    \"latitude\": 456,\r\n    \"webPage\": \"www.123.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/supermarkets",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"supermarkets"
+					]
+				},
+				"description": "Esta solicitud crea un nuevo productoCaracteristico. La API devuelve el recurso creado con el ID asignado."
+			},
+			"response": [
+				{
+					"name": "Agregar un supermercado válido",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Almacen exito\",\r\n    \"longitude\": 123,\r\n    \"latitude\": 456,\r\n    \"webPage\": \"www.123.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/supermarkets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"supermarkets"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Almacen exito\",\n    \"longitude\": 123,\n    \"latitude\": 456,\n    \"webPage\": \"www.123.com\",\n    \"id\": \"52abc2ea-9893-4b6f-84ba-2ab3861bff1c\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear un supermercado inválido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"id_ciudad\", data.id);\r",
+							"\r",
+							"pm.test(\"El código de estado es 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Almacen\",\r\n    \"longitude\": 123,\r\n    \"latitude\": 456,\r\n    \"webPage\": \"www.123.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/supermarkets",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"supermarkets"
+					]
+				},
+				"description": "Esta solicitud crea un nuevo productoCaracteristico. La API devuelve el recurso creado con el ID asignado."
+			},
+			"response": [
+				{
+					"name": "Agregar un supermercado invalido",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Almacen\",\r\n    \"longitude\": 123,\r\n    \"latitude\": 456,\r\n    \"webPage\": \"www.123.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/supermarkets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"supermarkets"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The name of the supermarket must have more than 10 characters.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los supermercados",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Número de supermercados > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El código de estado es 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/supermarkets",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"supermarkets"
+					]
+				},
+				"description": "Esta solicitud recibe todos los productosCaracteristicos. La API devuelve todos los productosCaracteristicos con información."
+			},
+			"response": [
+				{
+					"name": "Obtener todos los supermercados",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/supermarkets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"supermarkets"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"id\": \"52abc2ea-9893-4b6f-84ba-2ab3861bff1c\",\r\n        \"name\": \"Almacen exito\",\r\n        \"longitude\": 123,\r\n        \"latitude\": 456,\r\n        \"webPage\": \"www.123.com\",\r\n        \"cities\": []\r\n    },\r\n    {\r\n        \"id\": \"bd1cf326-7260-4943-8bba-f1f331ba049b\",\r\n        \"name\": \"Buenos Aires\",\r\n        \"longitude\": 123,\r\n        \"latitude\": 456,\r\n        \"webPage\": \"www.123.com\",\r\n        \"cities\": []\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener un supermercado por ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "supermarketId",
+							"value": "{{id_supermercado}}"
+						}
+					]
+				},
+				"description": "Esta solicitud de un productoCaracteristico. La API devuelve el productoCaracteristico con información."
+			},
+			"response": [
+				{
+					"name": "Obtener un supermercado por ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/supermarkets/:supermarketId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"supermarkets",
+								":supermarketId"
+							],
+							"variable": [
+								{
+									"key": "supermarketId",
+									"value": "1ab7c82b-e744-40e6-9c59-ba4e7530a62d"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"id\": \"52abc2ea-9893-4b6f-84ba-2ab3861bff1c\",\n    \"name\": \"Almacen exito\",\n    \"longitude\": 123,\n    \"latitude\": 456,\n    \"webPage\": \"www.123.com\",\n    \"cities\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un supermercado por un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Obtener el mensaje de error esperado\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The supermarket with the provided ID was not found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "supermarketId",
+							"value": "00000000-0000-0000-0000-000000000000"
+						}
+					]
+				},
+				"description": "Esta solicitud recibe un productoCaracteristico no válido. La API devuelve un mensaje de error \"No se encontró el productoCaracteristico con la identificación dada\""
+			},
+			"response": [
+				{
+					"name": "Obtener un supermercado por un ID que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/supermarkets/00000000-0000-0000-0000-000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"supermarkets",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The supermarket with the provided ID was not found.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un supermercado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Almacen exit\",\r\n    \"longitude\": 123,\r\n    \"latitude\": 456,\r\n    \"webPage\": \"www.123.com\",\r\n    \"cities\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "supermarketId",
+							"value": "{{id_supermercado}}"
+						}
+					]
+				},
+				"description": "Esta solicitud actualiza el productoCaracteristico. La API devuelve el recurso de actualización con toda la información."
+			},
+			"response": [
+				{
+					"name": "Actualizar un supermercado",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Almacen exit\",\r\n    \"longitude\": 123,\r\n    \"latitude\": 456,\r\n    \"webPage\": \"www.123.com\",\r\n    \"cities\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/supermarkets/00000000-0000-0000-0000-000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"supermarkets",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Almacen exit\",\n    \"longitude\": 123,\n    \"latitude\": 456,\n    \"webPage\": \"www.123.com\",\n    \"cities\": [],\n    \"id\": \"52abc2ea-9893-4b6f-84ba-2ab3861bff1c\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar un supermercado con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Obtener el mensaje de error esperado\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The supermarket with the provided ID was not found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Almacen exit\",\r\n    \"longitude\": 123,\r\n    \"latitude\": 456,\r\n    \"webPage\": \"www.123.com\",\r\n    \"cities\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "supermarketId",
+							"value": "00000000-0000-0000-0000-000000000000"
+						}
+					]
+				},
+				"description": "Esta solicitud actualiza un productoCaracteristico no válido. La API devuelve un mensaje de error \"No se encontró el productoCaracteristico con la identificación dada\""
+			},
+			"response": [
+				{
+					"name": "Actualizar un supermercado con un ID que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Almacen exit\",\r\n    \"longitude\": 123,\r\n    \"latitude\": 456,\r\n    \"webPage\": \"www.123.com\",\r\n    \"cities\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/supermarkets/:supermarketId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"supermarkets",
+								":supermarketId"
+							],
+							"variable": [
+								{
+									"key": "supermarketId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The supermarket with the provided ID was not found.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar una ciudad por su ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "supermarketId",
+							"value": "{{id_supermercado}}"
+						}
+					]
+				},
+				"description": "Esta solicitud elimina un productoCaracteristico. La API devuelve el código de estado de la operación."
+			},
+			"response": [
+				{
+					"name": "Eliminar una ciudad",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/supermarkets/:supermarketId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"supermarkets",
+								":supermarketId"
+							],
+							"variable": [
+								{
+									"key": "supermarketId",
+									"value": "00000000-0000-0000-0000-000000000000"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Eliminar una ciudad con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Obtener el mensaje de error esperado\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The supermarket with the provided ID was not found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "supermarketId",
+							"value": "00000000-0000-0000-0000-000000000000"
+						}
+					]
+				},
+				"description": "Esta solicitud elimina un productoCaracteristico no válido. La API devuelve un mensaje de error \"No se encontró el productoCaracteristico con la identificación dada\""
+			},
+			"response": [
+				{
+					"name": "Eliminar un productoCaracteristico que no existe",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/supermarkets/:supermarketId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"supermarkets",
+								":supermarketId"
+							],
+							"variable": [
+								{
+									"key": "supermarketId",
+									"value": "00000000-0000-0000-0000-000000000000"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The supermarket with the provided ID was not found.\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1"
+		}
+	]
+}

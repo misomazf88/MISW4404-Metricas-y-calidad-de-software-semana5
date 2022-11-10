@@ -1,0 +1,735 @@
+{
+	"info": {
+		"_postman_id": "cc2ccc26-608b-49b0-a129-31cf3c996e79",
+		"name": "Cities",
+		"description": "Documentación para el recurso Cities.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear una ciudad válida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"id_ciudad\", data.id);\r",
+							"\r",
+							"pm.test(\"El código de estado es 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Buenos Aires\",\r\n    \"country\": \"Argentina\",\r\n    \"numberInhabitants\": 10500000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities"
+					]
+				},
+				"description": "Esta solicitud crea un nuevo productoCaracteristico. La API devuelve el recurso creado con el ID asignado."
+			},
+			"response": [
+				{
+					"name": "Agregar una ciudad",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Buenos Aires\",\r\n    \"country\": \"Argentina\",\r\n    \"numberInhabitants\": 10500000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cities"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"id\": \"8d8ad518-a9d5-4ad6-bb9e-431e778f5ce8\",\n    \"name\": \"Buenos Aires\",\n    \"country\": \"Argentina\",\n    \"numberInhabitants\": 10500000\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear una ciudad inválida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"id_ciudad\", data.id);\r",
+							"\r",
+							"pm.test(\"El código de estado es 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Cordoba\",\r\n    \"country\": \"Argentin\",\r\n    \"numberInhabitants\": 8500000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities"
+					]
+				},
+				"description": "Esta solicitud crea un nuevo productoCaracteristico. La API devuelve el recurso creado con el ID asignado."
+			},
+			"response": [
+				{
+					"name": "Agregar una ciudad",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Buenos Aires\",\r\n    \"country\": \"Argentina\",\r\n    \"numberInhabitants\": 10500000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cities"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"id\": \"8d8ad518-a9d5-4ad6-bb9e-431e778f5ce8\",\n    \"name\": \"Buenos Aires\",\n    \"country\": \"Argentina\",\n    \"numberInhabitants\": 10500000\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas las ciudades",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Número de ciudades > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El código de estado es 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities"
+					]
+				},
+				"description": "Esta solicitud recibe todos los productosCaracteristicos. La API devuelve todos los productosCaracteristicos con información."
+			},
+			"response": [
+				{
+					"name": "Obtener todas las ciudades",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cities",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cities"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"id\": \"a678fc19-44a3-4256-80e0-d6b7b49176a6\",\r\n        \"name\": \"Buenos Aires\",\r\n        \"country\": \"Argentina\",\r\n        \"numberInhabitants\": 10500000,\r\n        \"supermarkets\": []\r\n    },\r\n    {\r\n        \"id\": \"a678fc19-44a3-4256-80e0-d6b7b49176a6\",\r\n        \"name\": \"Cordoba\",\r\n        \"country\": \"Argentina\",\r\n        \"numberInhabitants\": 10500000,\r\n        \"supermarkets\": []\r\n    },\r\n    {\r\n        \"id\": \"a678fc19-44a3-4256-80e0-d6b7b49176a6\",\r\n        \"name\": \"Bariloche\",\r\n        \"country\": \"Argentina\",\r\n        \"numberInhabitants\": 5000100,\r\n        \"supermarkets\": []\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener una ciudad por ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "{{id_ciudad}}"
+						}
+					]
+				},
+				"description": "Esta solicitud de un productoCaracteristico. La API devuelve el productoCaracteristico con información."
+			},
+			"response": [
+				{
+					"name": "Obtener una ciudad",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cities/1ab7c82b-e744-40e6-9c59-ba4e7530a62d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cities",
+								"1ab7c82b-e744-40e6-9c59-ba4e7530a62d"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n        \"id\": \"1ab7c82b-e744-40e6-9c59-ba4e7530a62d\",\n        \"name\": \"Cordoba\",\n        \"country\": \"Argentina\",\n        \"numberInhabitants\": 8500000,\n        \"supermarkets\": []\n    }"
+				}
+			]
+		},
+		{
+			"name": "Obtener una ciudad por un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Obtener el mensaje de error esperado\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The city with the provided ID was not found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "00000000-0000-0000-0000-000000000000"
+						}
+					]
+				},
+				"description": "Esta solicitud recibe un productoCaracteristico no válido. La API devuelve un mensaje de error \"No se encontró el productoCaracteristico con la identificación dada\""
+			},
+			"response": [
+				{
+					"name": "Obtener una ciudad que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cities/00000000-0000-0000-0000-000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cities",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The city with the provided ID was not found.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar una ciudad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Buenos Aires\",\r\n    \"country\": \"Argentina\",\r\n    \"numberInhabitants\": 10600000,\r\n    \"supermarkets\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "{{id_ciudad}}"
+						}
+					]
+				},
+				"description": "Esta solicitud actualiza el productoCaracteristico. La API devuelve el recurso de actualización con toda la información."
+			},
+			"response": [
+				{
+					"name": "Actualizar una ciudad",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Buenos Aires\",\r\n    \"country\": \"Argentina\",\r\n    \"numberInhabitants\": 10600000,\r\n    \"supermarkets\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/citites/00000000-0000-0000-0000-000000000000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"citites",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Buenos Aires\",\n    \"country\": \"Argentina\",\n    \"numberInhabitants\": 10600000,\n    \"supermarkets\": [],\n    \"id\": \"9c0f411a-dc80-4280-89eb-18816731b6fa\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar una ciudad con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Obtener el mensaje de error esperado\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The city with the provided ID was not found.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Buenos Aires\",\r\n    \"country\": \"Argentina\",\r\n    \"numberInhabitants\": 10600000,\r\n    \"supermarkets\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "00000000-0000-0000-0000-000000000000"
+						}
+					]
+				},
+				"description": "Esta solicitud actualiza un productoCaracteristico no válido. La API devuelve un mensaje de error \"No se encontró el productoCaracteristico con la identificación dada\""
+			},
+			"response": [
+				{
+					"name": "Actualizar una ciudad que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Buenos Aires\",\r\n    \"country\": \"Argentina\",\r\n    \"numberInhabitants\": 10600000,\r\n    \"supermarkets\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cities/:cityId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								":cityId"
+							],
+							"variable": [
+								{
+									"key": "cityId",
+									"value": "00000000-0000-0000-0000-000000000000"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The city with the provided ID was not found.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar una ciudad por su ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "{{id_ciudad}}"
+						}
+					]
+				},
+				"description": "Esta solicitud elimina un productoCaracteristico. La API devuelve el código de estado de la operación."
+			},
+			"response": [
+				{
+					"name": "Eliminar una ciudad",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cities/:cityId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								":cityId"
+							],
+							"variable": [
+								{
+									"key": "cityId",
+									"value": "00000000-0000-0000-0000-000000000000"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Eliminar una ciudad con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Obtener el mensaje de error esperado\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"No se encontró el productoCaracteristico con la identificación proporcionada.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "00000000-0000-0000-0000-000000000000"
+						}
+					]
+				},
+				"description": "Esta solicitud elimina un productoCaracteristico no válido. La API devuelve un mensaje de error \"No se encontró el productoCaracteristico con la identificación dada\""
+			},
+			"response": [
+				{
+					"name": "Eliminar un productoCaracteristico que no existe",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cities/:cityId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								":cityId"
+							],
+							"variable": [
+								{
+									"key": "cityId",
+									"value": "00000000-0000-0000-0000-000000000000"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The city with the provided ID was not found.\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1"
+		},
+		{
+			"key": "city_id",
+			"value": "1ab7c82b-e744-40e6-9c59-ba4e7530a62d"
+		}
+	]
+}

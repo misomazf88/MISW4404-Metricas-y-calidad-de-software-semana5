@@ -1,2 +1,2 @@
-# MISW4404-Metricas-y-calidad-de-software-semana5
-Repositorio semana 5
+# MISW4404-Metricas-y-calidad-de-software
+Repositorio creado para la materia Métricas y calidad de software de MISO Uniandes

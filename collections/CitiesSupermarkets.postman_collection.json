@@ -1,0 +1,858 @@
+{
+	"info": {
+		"_postman_id": "04ecd3e2-cecf-42ce-a8cd-0ccb5051f47c",
+		"name": "CitiesSupermarkets",
+		"description": "Documentación para la asociacion CitiesSupermarkets.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Asociar un nuevo supermercado a una ciudad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"id_asociacion\", data.id);\r",
+							"\r",
+							"pm.test(\"El código de estado es 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId",
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+						},
+						{
+							"key": "supermarketId",
+							"value": "8fb11e99-54c3-4281-a602-b2c042fe07f1"
+						}
+					]
+				},
+				"description": "Esta solicitud crea un nuevo productoCaracteristico. La API devuelve el recurso creado con el ID asignado."
+			},
+			"response": [
+				{
+					"name": "Asociar un nuevo supermercado a una ciudad",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cities/:cityId/supermarkets/:supermarketId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cities",
+								":cityId",
+								"supermarkets",
+								":supermarketId"
+							],
+							"variable": [
+								{
+									"key": "cityId",
+									"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+								},
+								{
+									"key": "supermarketId",
+									"value": "de37e3ea-ba78-4816-ba95-deb71ae82609"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"id\": \"de37e3ea-ba78-4816-ba95-deb71ae82608\",\n    \"name\": \"Buenos Aires\",\n    \"country\": \"Argentina\",\n    \"numberInhabitants\": 10500000,\n    \"supermarkets\": [\n        {\n            \"id\": \"8fb11e99-54c3-4281-a602-b2c042fe07f1\",\n            \"name\": \"Almacen exito\",\n            \"longitude\": 123,\n            \"latitude\": 456,\n            \"webPage\": \"www.123.com\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Asociar un supermercado que no existe a una ciudad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"id_asociacion\", data.id);\r",
+							"\r",
+							"pm.test(\"El código de estado es 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId",
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+						},
+						{
+							"key": "supermarketId",
+							"value": "8fb11e99-54c3-4281-a602-b2c042fe07f2"
+						}
+					]
+				},
+				"description": "Esta solicitud crea un nuevo productoCaracteristico. La API devuelve el recurso creado con el ID asignado."
+			},
+			"response": [
+				{
+					"name": "Asociar un supermercado que no existe a una ciudad",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cities/:cityId/supermarkets/:supermarketId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cities",
+								":cityId",
+								"supermarkets",
+								":supermarketId"
+							],
+							"variable": [
+								{
+									"key": "cityId",
+									"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+								},
+								{
+									"key": "supermarketId",
+									"value": "de37e3ea-ba78-4816-ba95-deb71ae82601"
+								}
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"The supermarket with the provided ID was not found.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los supermercados que pertenecen a una ciudad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Número de supermercados > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"El código de estado es 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId/supermarkets",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId",
+						"supermarkets"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+						}
+					]
+				},
+				"description": "Esta solicitud recibe todos los productosCaracteristicos. La API devuelve todos los productosCaracteristicos con información."
+			},
+			"response": [
+				{
+					"name": "Obtener todos los supermercados que pertenecen a una ciudad",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cities/:cityId/supermarkets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cities",
+								":cityId",
+								"supermarkets"
+							],
+							"variable": [
+								{
+									"key": "cityId",
+									"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"id\": \"8fb11e99-54c3-4281-a602-b2c042fe07f1\",\r\n        \"name\": \"Almacen exito\",\r\n        \"longitude\": 123,\r\n        \"latitude\": 456,\r\n        \"webPage\": \"www.123.com\"\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener un supermercado asociado a una ciudad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId",
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "{{id_ciudad}}"
+						},
+						{
+							"key": "supermarketId",
+							"value": "{{id_supermercado}}"
+						}
+					]
+				},
+				"description": "Esta solicitud de un productoCaracteristico. La API devuelve el productoCaracteristico con información."
+			},
+			"response": [
+				{
+					"name": "Obtener un supermercado por ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/supermarkets/:supermarketId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"supermarkets",
+								":supermarketId"
+							],
+							"variable": [
+								{
+									"key": "supermarketId",
+									"value": "1ab7c82b-e744-40e6-9c59-ba4e7530a62d"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"id\": \"52abc2ea-9893-4b6f-84ba-2ab3861bff1c\",\n    \"name\": \"Almacen exito\",\n    \"longitude\": 123,\n    \"latitude\": 456,\n    \"webPage\": \"www.123.com\",\n    \"cities\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un supermercado que no está asociado a una ciudad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Obtener el mensaje de error esperado\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The supermarket with the provided id is not associated with the city.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId",
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "{{id_ciudad}}"
+						},
+						{
+							"key": "supermarketId",
+							"value": "ee11f5d5-d697-45c9-8b0f-9142bbe4c224"
+						}
+					]
+				},
+				"description": "Esta solicitud recibe un productoCaracteristico no válido. La API devuelve un mensaje de error \"No se encontró el productoCaracteristico con la identificación dada\""
+			},
+			"response": [
+				{
+					"name": "Obtener un supermercado que no está asociado a una ciudad",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cities/:cityId/supermarkets/:supermarketId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cities",
+								":cityId",
+								"supermarkets",
+								":supermarketId"
+							],
+							"variable": [
+								{
+									"key": "cityId",
+									"value": "00000000-0000-0000-0000-000000000000"
+								},
+								{
+									"key": "supermarketId",
+									"value": "00000000-0000-0000-0000-000000000000"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The supermarket with the provided id is not associated with the city.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar los supermercados que están asociados a una ciudad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"de37e3ea-ba78-4816-ba95-deb71ae82608\",\r\n    \"name\": \"Buenos Aires\",\r\n    \"country\": \"Argentina\",\r\n    \"numberInhabitants\": 10500000,\r\n    \"supermarkets\": [\r\n        {\r\n            \"id\": \"8fb11e99-54c3-4281-a602-b2c042fe07f1\",\r\n            \"name\": \"Almacen exit\",\r\n            \"longitude\": 123,\r\n            \"latitude\": 456,\r\n            \"webPage\": \"www.123.com\"\r\n        },\r\n        {\r\n            \"id\": \"8fb11e99-54c3-4281-a602-b2c042fe07f1\",\r\n            \"name\": \"Almacen exito\",\r\n            \"longitude\": 123,\r\n            \"latitude\": 456,\r\n            \"webPage\": \"www.123.com\"\r\n        },\r\n        {\r\n            \"id\": \"8fb11e99-54c3-4281-a602-b2c042fe07f1\",\r\n            \"name\": \"Almacen exito1\",\r\n            \"longitude\": 123,\r\n            \"latitude\": 456,\r\n            \"webPage\": \"www.123.com\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId/supermarkets",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId",
+						"supermarkets"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+						}
+					]
+				},
+				"description": "Esta solicitud actualiza el productoCaracteristico. La API devuelve el recurso de actualización con toda la información."
+			},
+			"response": [
+				{
+					"name": "Actualizar los supermercados que están asociados a una ciudad",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"de37e3ea-ba78-4816-ba95-deb71ae82608\",\r\n    \"name\": \"Buenos Aires\",\r\n    \"country\": \"Argentina\",\r\n    \"numberInhabitants\": 10500000,\r\n    \"supermarkets\": [\r\n        {\r\n            \"id\": \"8fb11e99-54c3-4281-a602-b2c042fe07f1\",\r\n            \"name\": \"Almacen exit\",\r\n            \"longitude\": 123,\r\n            \"latitude\": 456,\r\n            \"webPage\": \"www.123.com\"\r\n        },\r\n        {\r\n            \"id\": \"8fb11e99-54c3-4281-a602-b2c042fe07f1\",\r\n            \"name\": \"Almacen exito\",\r\n            \"longitude\": 123,\r\n            \"latitude\": 456,\r\n            \"webPage\": \"www.123.com\"\r\n        },\r\n        {\r\n            \"id\": \"8fb11e99-54c3-4281-a602-b2c042fe07f1\",\r\n            \"name\": \"Almacen exito1\",\r\n            \"longitude\": 123,\r\n            \"latitude\": 456,\r\n            \"webPage\": \"www.123.com\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cities/:cityId/supermarkets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cities",
+								":cityId",
+								"supermarkets"
+							],
+							"variable": [
+								{
+									"key": "cityId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"id\": \"de37e3ea-ba78-4816-ba95-deb71ae82608\",\n    \"name\": \"Buenos Aires\",\n    \"country\": \"Argentina\",\n    \"numberInhabitants\": 10500000,\n    \"supermarkets\": {\n        \"id\": \"de37e3ea-ba78-4816-ba95-deb71ae82608\",\n        \"name\": \"Buenos Aires\",\n        \"country\": \"Argentina\",\n        \"numberInhabitants\": 10500000,\n        \"supermarkets\": [\n            {\n                \"id\": \"8fb11e99-54c3-4281-a602-b2c042fe07f1\",\n                \"name\": \"Almacen exit\",\n                \"longitude\": 123,\n                \"latitude\": 456,\n                \"webPage\": \"www.123.com\"\n            },\n            {\n                \"id\": \"8fb11e99-54c3-4281-a602-b2c042fe07f1\",\n                \"name\": \"Almacen exito\",\n                \"longitude\": 123,\n                \"latitude\": 456,\n                \"webPage\": \"www.123.com\"\n            },\n            {\n                \"id\": \"8fb11e99-54c3-4281-a602-b2c042fe07f1\",\n                \"name\": \"Almacen exito1\",\n                \"longitude\": 123,\n                \"latitude\": 456,\n                \"webPage\": \"www.123.com\"\n            }\n        ]\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar los supermercados asociados a una ciudad, con un supermercado inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"de37e3ea-ba78-4816-ba95-deb71ae82608\",\r\n    \"name\": \"Buenos Aires\",\r\n    \"country\": \"Argentina\",\r\n    \"numberInhabitants\": 10500000,\r\n    \"supermarkets\": [\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId/supermarkets",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId",
+						"supermarkets"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+						}
+					]
+				},
+				"description": "Esta solicitud actualiza un productoCaracteristico no válido. La API devuelve un mensaje de error \"No se encontró el productoCaracteristico con la identificación dada\""
+			},
+			"response": [
+				{
+					"name": "Actualizar un supermercado con un ID que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"de37e3ea-ba78-4816-ba95-deb71ae82608\",\r\n    \"name\": \"Buenos Aires\",\r\n    \"country\": \"Argentina\",\r\n    \"numberInhabitants\": 10500000,\r\n    \"supermarkets\": [\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/cities/:cityId/supermarkets",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								":cityId",
+								"supermarkets"
+							],
+							"variable": [
+								{
+									"key": "cityId",
+									"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"id\": \"de37e3ea-ba78-4816-ba95-deb71ae82608\",\n    \"name\": \"Buenos Aires\",\n    \"country\": \"Argentina\",\n    \"numberInhabitants\": 10500000,\n    \"supermarkets\": {\n        \"id\": \"de37e3ea-ba78-4816-ba95-deb71ae82608\",\n        \"name\": \"Buenos Aires\",\n        \"country\": \"Argentina\",\n        \"numberInhabitants\": 10500000,\n        \"supermarkets\": []\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar un supermercado asociado a una ciudad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId",
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+						},
+						{
+							"key": "supermarketId",
+							"value": "8fb11e99-54c3-4281-a602-b2c042fe07f1"
+						}
+					]
+				},
+				"description": "Esta solicitud elimina un productoCaracteristico. La API devuelve el código de estado de la operación."
+			},
+			"response": [
+				{
+					"name": "Eliminar un supermercado asociado a una ciudad",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cities/:cityId/supermarkets/:supermarketId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								":cityId",
+								"supermarkets",
+								":supermarketId"
+							],
+							"variable": [
+								{
+									"key": "cityId",
+									"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+								},
+								{
+									"key": "supermarketId",
+									"value": "de37e3ea-ba78-4816-ba95-deb71ae82609"
+								}
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Eliminar un supermercado que no estaba previamente asociado a una ciudad",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"El código de estado es 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Obtener el mensaje de error esperado\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"The supermarket with the provided id is not associated with the city.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/cities/:cityId/supermarkets/:supermarketId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"cities",
+						":cityId",
+						"supermarkets",
+						":supermarketId"
+					],
+					"variable": [
+						{
+							"key": "cityId",
+							"value": "de37e3ea-ba78-4816-ba95-deb71ae82608"
+						},
+						{
+							"key": "supermarketId",
+							"value": "00cff943-d188-47f3-a900-a89486c78f58"
+						}
+					]
+				},
+				"description": "Esta solicitud elimina un productoCaracteristico no válido. La API devuelve un mensaje de error \"No se encontró el productoCaracteristico con la identificación dada\""
+			},
+			"response": [
+				{
+					"name": "Eliminar un supermercado que no estaba previamente asociado a una ciudad",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/cities/:cityId/supermarkets/:supermarketId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"cities",
+								":cityId",
+								"supermarkets",
+								":supermarketId"
+							],
+							"variable": [
+								{
+									"key": "cityId",
+									"value": "00000000-0000-0000-0000-000000000000"
+								},
+								{
+									"key": "supermarketId",
+									"value": "00000000-0000-0000-0000-000000000000"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"The supermarket with the provided id is not associated with the city.\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1"
+		}
+	]
+}
